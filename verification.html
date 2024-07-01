@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta information -->
+    <meta charset="utf-8">
+    <title>EduGuard</title>
+    
+    <!-- Inline CSS for styling -->
+    <style>
+        body {
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 300px;
+            height: 220px;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        #number, #verificationcode {
+            width: calc(100% - 24px);
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #recaptcha-container {
+            margin-bottom: 10px;
+        }
+        #send, #verify {
+            width: 100%;
+            height: 40px;
+            outline: none;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #send:hover, #verify:hover {
+            background-color: #0056b3;
+        }
+        .p-conf, .n-conf {
+            width: calc(100% - 20px);
+            border-radius: 5px;
+            padding: 8px 10px;
+            margin: 4px auto;
+            display: none;
+            text-align: center;
+        }
+        .p-conf {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        .n-conf {
+            background-color: #f44336;
+            color: #fff;
+        }
+        .footerBottom {
+            background-color: gray;
+            padding: 10px;
+            margin-top: auto;
+        }
+        .footerBottom p {
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container for the phone number input and verification elements -->
+    <div class="container">
+        <!-- Section for sending verification code -->
+        <div id="sender">
+            <input type="text" id="number" placeholder="+267...">
+            <div id="recaptcha-container"></div>
+            <button id="send" onClick="phoneAuth()">Send Verification Code</button>
+        </div>
+        
+        <!-- Section for entering and verifying OTP -->
+        <div id="verifier" style="display: none">
+            <input type="text" id="verificationcode" placeholder="Enter OTP Code">
+            <button id="verify" onClick="codeverify()">Verify</button>
+            <!-- Confirmation messages -->
+            <div class="p-conf">Number Verified 🎉</div>
+            <div class="n-conf">OTP Error 😞</div>
+        </div>
+    </div>
+    
+    <!-- Firebase SDK scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    
+    <!-- JavaScript for Firebase authentication and phone verification -->
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsbF4gZgL0qIo9mA5MH6kVX89u3FKwvNA",
+            authDomain: "eduguard-d8b47.firebaseapp.com",
+            projectId: "eduguard-d8b47",
+            storageBucket: "eduguard-d8b47.appspot.com",
+            messagingSenderId: "1063042315760",
+            appId: "1:1063042315760:web:baf192c0e40a5473d55935"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        let recaptchaVerifier;
+
+        // Function to render the reCAPTCHA element
+        function render() {
+            recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+            recaptchaVerifier.render();
+        }
+
+        // Function to send verification code to the provided phone number
+        function phoneAuth() {
+            const number = document.getElementById('number').value;
+
+            if (recaptchaVerifier) {
+                firebase.auth().signInWithPhoneNumber(number, recaptchaVerifier).then(function(confirmationResult) {
+                    window.confirmationResult = confirmationResult;
+
+                    alert(`Hello 😊, Your verification code is on its way. 🚀`);
+
+                    document.getElementById('sender').style.display = 'none';
+                    document.getElementById('verifier').style.display = 'block';
+                }).catch(function(error) {
+                    alert(error.message);
+                });
+            } else {
+                alert("Sorry 😢, verify captcha first!");
+            }
+        }
+
+        // Function to verify the entered OTP code
+        function codeverify() {
+            const code = document.getElementById('verificationcode').value;
+            window.confirmationResult.confirm(code).then(function() {
+                document.getElementById('verifier').style.display = 'none';
+                document.getElementsByClassName('p-conf')[0].style.display = 'block';
+                window.location.href = "home.html"; // Redirect to home.html on successful verification
+            }).catch(function() {
+                document.getElementById('verifier').style.display = 'none';
+                document.getElementsByClassName('n-conf')[0].style.display = 'block';
+            });
+        }
+
+        window.onload = render;
+    </script>
+    
+    <!-- Footer section -->
+    <div class="footerBottom">
+        <p>Copyright &copy; 2024; Designed by <span class="designer">Kaone</span></p>
+    </div>
+</body>
+</html>
