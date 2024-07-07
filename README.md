@@ -2,9 +2,9 @@
 
 ## Video 
 
-https://github.com/IzzyDevOps/EduGuard/assets/147671694/510956e3-027d-428e-aa61-15e1c7adcdf3
+### Overview Of The Homepage
 
-Click the image above to watch a video overview of EduGuard!
+https://github.com/IzzyDevOps/EduGuard/assets/147671694/510956e3-027d-428e-aa61-15e1c7adcdf3
 
 ## Description
 
