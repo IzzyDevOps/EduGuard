@@ -6,7 +6,7 @@ Click the image above to watch a video overview of EduGuard!
 
 ## Description
 
-*EduGuard* aims to revolutionize user registration security through innovative password strength evaluation and CAPTCHA verification. These features are essential for safeguarding user data and preventing unauthorized access in online communities. By ensuring strong passwords and confirming human users, EduGuard mitigates the risks of automated attacks and unauthorized entries.
+**EduGuard** aims to revolutionize user registration security through innovative password strength evaluation and CAPTCHA verification. These features are essential for safeguarding user data and preventing unauthorized access in online communities. By ensuring strong passwords and confirming human users, EduGuard mitigates the risks of automated attacks and unauthorized entries.
 
 ## Key Features:
 
@@ -58,7 +58,7 @@ Click the image above to watch a video overview of EduGuard!
 
 * Enter your phone number in the designated field.
 
-*Follow any instructions provided by the application to complete the verification process.
+* Follow any instructions provided by the application to complete the verification process.
 
 ### CAPTCHA Verification: // verification.html
 
@@ -88,4 +88,4 @@ Click the image above to watch a video overview of EduGuard!
 _Did you know that Google reCAPTCHA not only protects websites from spam and abuse but also helps digitize books, newspapers, and maps? Every time you solve a reCAPTCHA, you might be contributing to the preservation of valuable historical texts!_
 
 ## Stay Secure!
-Remember, a *strong password* is your first line of defense. _EduGuard_ encourages everyone to use unique, complex passwords for each of their online accounts. Your security matters!
+Remember, a **strong password** is your first line of defense. _EduGuard_ encourages everyone to use unique, complex passwords for each of their online accounts. Your security matters!
